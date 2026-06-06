@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU Readiness Score — CORDA AI</title>
+<meta name="description" content="Get your free EU Readiness Score in 12 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#4358F5;--blue-dk:#3347d4;--graphite:#0C0E16;
+  --offwhite:#F2F1EC;--lgrey:#E6E4E0;--taupe:#6E685D;
+  --white:#fff;--font:'Inter',sans-serif;
+  --green:#16a34a;--amber:#d97706;--red:#dc2626;
+}
+html,body{height:100%;font-family:var(--font);background:var(--offwhite);color:var(--graphite);-webkit-font-smoothing:antialiased}
+/* NAV */
+nav{height:64px;background:rgba(242,241,236,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--lgrey);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:50}
+.nav-i{max-width:1140px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-txt{font-size:14px;font-weight:600;letter-spacing:.18em;color:var(--graphite)}
+.back{font-size:13px;color:var(--taupe);text-decoration:none;transition:color .2s}
+.back:hover{color:var(--graphite)}
+/* LAYOUT */
+main{padding:40px 24px 80px}
+.wrap{max-width:640px;margin:0 auto}
+/* PROGRESS */
+.prog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.prog-label{font-size:12px;font-weight:500;color:var(--taupe);letter-spacing:.04em}
+.prog-pct{font-size:12px;font-weight:600;color:var(--blue)}
+.prog-track{height:3px;background:var(--lgrey);border-radius:2px;margin-bottom:32px}
+.prog-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .4s cubic-bezier(.25,.46,.45,.94)}
+/* CARD */
+.card{background:var(--white);border:1px solid var(--lgrey);border-radius:12px;padding:36px;min-height:420px;display:flex;flex-direction:column;gap:0}
+.step-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.q-title{font-size:22px;font-weight:700;letter-spacing:-.02em;color:var(--graphite);line-height:1.25;margin-bottom:6px}
+.q-sub{font-size:14px;color:var(--taupe);margin-bottom:28px;line-height:1.6}
+/* OPTIONS */
+.options{display:grid;gap:8px}
+.options.cols-2{grid-template-columns:1fr 1fr}
+.options.cols-3{grid-template-columns:1fr 1fr 1fr}
+.opt{display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid var(--lgrey);border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;color:var(--graphite);background:var(--offwhite);transition:border-color .15s,background .15s,color .15s;user-select:none;-webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:rgba(67,88,245,.4);background:#f0f2fe}
+.opt.selected{border-color:var(--blue);background:#eef0fe;color:var(--blue)}
+.opt-icon{width:18px;height:18px;border:1.5px solid var(--lgrey);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:border-color .15s,background .15s}
+.opt.selected .opt-icon{border-color:var(--blue);background:var(--blue)}
+.opt.selected .opt-icon::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--white)}
+.opt-sq .opt-icon{border-radius:4px}
+.opt.selected.opt-sq .opt-icon::after{content:'✓';font-size:10px;font-weight:700;color:var(--white);width:auto;height:auto;border-radius:0;background:transparent}
+/* TEXT INPUTS */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--taupe);margin-bottom:8px}
+.field input{width:100%;padding:12px 16px;border:1px solid var(--lgrey);border-radius:8px;font-family:var(--font);font-size:15px;color:var(--graphite);background:var(--offwhite);outline:none;transition:border-color .15s}
+.field input:focus{border-color:var(--blue);background:var(--white)}
+.field input::placeholder{color:var(--taupe)}
+/* NAV BUTTONS */
+.btn-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:28px}
+.btn-next{background:var(--blue);color:var(--white);border:none;padding:13px 28px;font-family:var(--font);font-size:15px;font-weight:600;cursor:pointer;border-radius:6px;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-next:hover{background:var(--blue-dk);transform:translateY(-1px)}
+.btn-next:disabled{background:var(--lgrey);color:var(--taupe);cursor:not-allowed;transform:none}
+.btn-back{background:transparent;color:var(--taupe);border:1px solid var(--lgrey);padding:12px 20px;font-family:var(--font);font-size:14px;font-weight:500;cursor:pointer;border-radius:6px;transition:border-color .15s,color .15s}
+.btn-back:hover{border-color:var(--taupe);color:var(--graphite)}
+.btn-back:disabled{opacity:0;pointer-events:none}
+/* VALIDATION */
+.err{font-size:12px;color:var(--red);margin-top:8px;display:none}
+.err.show{display:block}
+/* RESULT */
+.result{display:none;flex-direction:column;gap:0}
+.result.active{display:flex}
+.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px}
+.result-score-wrap{text-align:center}
+.result-score-num{font-size:72px;font-weight:700;letter-spacing:-.04em;color:var(--graphite);line-height:1}
+.result-score-den{font-size:18px;color:var(--taupe);font-weight:400}
+.result-band{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px}
+.band-strong{background:#dcfce7;color:var(--green)}
+.band-near{background:#fef3c7;color:var(--amber)}
+.band-needs{background:#fee2e2;color:var(--red)}
+.band-not{background:#fee2e2;color:var(--red)}
+.result-intro{flex:1}
+.result-intro h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.result-intro p{font-size:14px;color:var(--taupe);line-height:1.7}
+.divider{height:1px;background:var(--lgrey);margin:20px 0}
+.dim-rows{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.dim-row{display:grid;grid-template-columns:1fr 80px 32px;gap:8px;align-items:center}
+.dim-name{font-size:13px;color:var(--graphite);font-weight:500}
+.bar-track{height:5px;background:var(--lgrey);border-radius:3px;overflow:hidden}
+.bar-f{height:100%;border-radius:3px;background:var(--blue);width:0;transition:width 1.2s cubic-bezier(.25,.46,.45,.94)}
+.bar-f.low{background:var(--amber)}
+.bar-f.vlow{background:var(--red)}
+.dim-val{font-size:13px;font-weight:600;color:var(--graphite);text-align:right}
+.result-cta{background:var(--blue);color:var(--white);text-decoration:none;padding:14px 28px;border-radius:6px;font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s;margin-bottom:12px;align-self:flex-start}
+.result-cta:hover{background:var(--blue-dk);transform:translateY(-1px)}
+.result-note{font-size:12px;color:var(--taupe);line-height:1.6}
+.success-msg{background:#dcfce7;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;font-size:13px;color:#15803d;margin-bottom:16px;display:none}
+.success-msg.show{display:block}
+/* RESPONSIVE */
+@media(max-width:600px){
+  .card{padding:24px}.q-title{font-size:18px}
+  .options.cols-2,.options.cols-3{grid-template-columns:1fr}
+  .result-top{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-i">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#4358F5"/><circle cx="16" cy="16" r="9" stroke="white" stroke-width="1.5" fill="none"/><ellipse cx="16" cy="16" rx="9" ry="3.2" stroke="white" stroke-width="1.5" fill="none"/><line x1="16" y1="7" x2="16" y2="25" stroke="white" stroke-width="1.5"/><line x1="7" y1="16" x2="25" y2="16" stroke="white" stroke-width="1.5"/></svg>
+      <span class="logo-txt">CORDA</span>
+    </a>
+    <a href="/" class="back">&larr; Back to home</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+  <div class="prog-header">
+    <span class="prog-label" id="step-label">Step 1 of 5</span>
+    <span class="prog-pct" id="prog-pct">0%</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+
+  <div class="card">
+
+    <!-- STEP 1: PRODUCT -->
+    <div class="step" id="s1">
+      <div class="step-label">Product basics</div>
+      <div class="q-title">What kind of product are you bringing to Europe?</div>
+      <div class="q-sub">Select the category that best fits.</div>
+      <div class="options cols-2" id="category-opts">
+        <div class="opt" data-val="condiment"><span class="opt-icon"></span>Condiment / sauce / sambal</div>
+        <div class="opt" data-val="beverage"><span class="opt-icon"></span>Beverage / tea / juice</div>
+        <div class="opt" data-val="snack"><span class="opt-icon"></span>Snack / cracker / chip</div>
+        <div class="opt" data-val="ready_meal"><span class="opt-icon"></span>Ready meal / frozen</div>
+        <div class="opt" data-val="fermented"><span class="opt-icon"></span>Fermented specialty</div>
+        <div class="opt" data-val="other"><span class="opt-icon"></span>Other</div>
+      </div>
+      <div class="err" id="err-cat">Please select your product category.</div>
+      <div class="btn-row">
+        <button class="btn-back" disabled>Back</button>
+        <button class="btn-next" id="next1">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: PRODUCTION -->
+    <div class="step" id="s2" style="display:none">
+      <div class="step-label">Production &amp; compliance</div>
+      <div class="q-title">How is your product made?</div>
+      <div class="q-sub">Select the primary processing method.</div>
+      <div class="options cols-2" id="process-opts">
+        <div class="opt" data-val="pasteurised"><span class="opt-icon"></span>Pasteurised / heat-treated</div>
+        <div class="opt" data-val="fermented"><span class="opt-icon"></span>Fermented</div>
+        <div class="opt" data-val="smoked"><span class="opt-icon"></span>Smoked / dried</div>
+        <div class="opt" data-val="freeze_dried"><span class="opt-icon"></span>Freeze-dried</div>
+        <div class="opt" data-val="raw"><span class="opt-icon"></span>Raw / fresh</div>
+        <div class="opt" data-val="other"><span class="opt-icon"></span>Other / mixed</div>
+      </div>
+      <div class="err" id="err-proc">Please select a processing method.</div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Current certifications</div>
+        <div class="q-sub">Select all that apply.</div>
+        <div class="options cols-2" id="cert-opts">
+          <div class="opt opt-sq" data-val="haccp"><span class="opt-icon"></span>HACCP</div>
+          <div class="opt opt-sq" data-val="gmp"><span class="opt-icon"></span>GMP</div>
+          <div class="opt opt-sq" data-val="brc"><span class="opt-icon"></span>BRC / IFS</div>
+          <div class="opt opt-sq" data-val="halal"><span class="opt-icon"></span>Halal</div>
+          <div class="opt opt-sq" data-val="organic"><span class="opt-icon"></span>Organic</div>
+          <div class="opt opt-sq" data-val="none"><span class="opt-icon"></span>None yet</div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Monthly production capacity</div>
+        <div class="options cols-2" id="cap-opts">
+          <div class="opt" data-val="under_1000"><span class="opt-icon"></span>Under 1,000 units</div>
+          <div class="opt" data-val="1000_5000"><span class="opt-icon"></span>1,000 to 5,000</div>
+          <div class="opt" data-val="5000_20000"><span class="opt-icon"></span>5,000 to 20,000</div>
+          <div class="opt" data-val="over_20000"><span class="opt-icon"></span>Over 20,000</div>
+        </div>
+        <div class="err" id="err-cap">Please select your capacity.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back2">Back</button>
+        <button class="btn-next" id="next2">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: PACKAGING -->
+    <div class="step" id="s3" style="display:none">
+      <div class="step-label">Packaging &amp; labelling</div>
+      <div class="q-title">What does your label look like today?</div>
+      <div class="q-sub">Select all languages currently on your label.</div>
+      <div class="options cols-2" id="lang-opts">
+        <div class="opt opt-sq" data-val="english"><span class="opt-icon"></span>English</div>
+        <div class="opt opt-sq" data-val="local"><span class="opt-icon"></span>Indonesian / Malay / Thai</div>
+        <div class="opt opt-sq" data-val="chinese"><span class="opt-icon"></span>Chinese</div>
+        <div class="opt opt-sq" data-val="none"><span class="opt-icon"></span>None / local only</div>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Nutritional information on pack</div>
+        <div class="options" id="nutri-opts">
+          <div class="opt" data-val="complete"><span class="opt-icon"></span>Yes — complete EU-format nutritional panel</div>
+          <div class="opt" data-val="partial"><span class="opt-icon"></span>Partial — some info present</div>
+          <div class="opt" data-val="none"><span class="opt-icon"></span>No nutritional information yet</div>
+        </div>
+        <div class="err" id="err-nutri">Please select an option.</div>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Primary pack size</div>
+        <div class="options cols-2" id="pack-opts">
+          <div class="opt" data-val="small"><span class="opt-icon"></span>Under 150g / ml</div>
+          <div class="opt" data-val="mid"><span class="opt-icon"></span>150g to 350g / ml</div>
+          <div class="opt" data-val="large"><span class="opt-icon"></span>350g to 600g / ml</div>
+          <div class="opt" data-val="xlarge"><span class="opt-icon"></span>Over 600g / ml</div>
+        </div>
+        <div class="err" id="err-pack">Please select a pack size.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back3">Back</button>
+        <button class="btn-next" id="next3">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: COMMERCIAL -->
+    <div class="step" id="s4" style="display:none">
+      <div class="step-label">Markets &amp; commercial</div>
+      <div class="q-title">Which EU markets are you targeting?</div>
+      <div class="q-sub">Select all you are considering.</div>
+      <div class="options cols-2" id="market-opts">
+        <div class="opt opt-sq" data-val="netherlands"><span class="opt-icon"></span>🇳🇱 Netherlands</div>
+        <div class="opt opt-sq" data-val="germany"><span class="opt-icon"></span>🇩🇪 Germany</div>
+        <div class="opt opt-sq" data-val="france"><span class="opt-icon"></span>🇫🇷 France</div>
+        <div class="opt opt-sq" data-val="uk"><span class="opt-icon"></span>🇬🇧 UK</div>
+        <div class="opt opt-sq" data-val="sweden"><span class="opt-icon"></span>🇸🇪 Sweden</div>
+        <div class="opt opt-sq" data-val="other"><span class="opt-icon"></span>Other / not sure yet</div>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Export price per 100g equivalent (in EUR)</div>
+        <div class="q-sub">Approximate ex-works price you charge buyers.</div>
+        <div class="options cols-2" id="price-opts">
+          <div class="opt" data-val="low"><span class="opt-icon"></span>Under €0.80</div>
+          <div class="opt" data-val="value"><span class="opt-icon"></span>€0.80 to €2.50</div>
+          <div class="opt" data-val="mid"><span class="opt-icon"></span>€2.50 to €5.00</div>
+          <div class="opt" data-val="premium"><span class="opt-icon"></span>Over €5.00</div>
+          <div class="opt" data-val="unsure"><span class="opt-icon"></span>Not sure yet</div>
+        </div>
+        <div class="err" id="err-price">Please select a price range.</div>
+      </div>
+
+      <div style="margin-top:24px">
+        <div class="q-title" style="font-size:17px;margin-bottom:6px">Are you currently exporting to any market?</div>
+        <div class="options cols-2" id="export-opts">
+          <div class="opt" data-val="yes"><span class="opt-icon"></span>Yes</div>
+          <div class="opt" data-val="no"><span class="opt-icon"></span>No, this would be our first</div>
+        </div>
+        <div class="err" id="err-exp">Please select an option.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back4">Back</button>
+        <button class="btn-next" id="next4">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: CONTACT -->
+    <div class="step" id="s5" style="display:none">
+      <div class="step-label">Almost there</div>
+      <div class="q-title">Where should we send your score?</div>
+      <div class="q-sub">Your results will appear immediately. We will also follow up with a detailed breakdown and next-step recommendations.</div>
+      <div class="field"><label>Your name</label><input type="text" id="inp-name" placeholder="Arini Santoso" autocomplete="name"></div>
+      <div class="field"><label>Company name</label><input type="text" id="inp-company" placeholder="Bu Rudy Foods" autocomplete="organization"></div>
+      <div class="field"><label>Email address</label><input type="email" id="inp-email" placeholder="arini@burudy.com" autocomplete="email"></div>
+      <div class="err" id="err-contact">Please fill in your name and a valid email address.</div>
+      <div class="btn-row">
+        <button class="btn-back" id="back5">Back</button>
+        <button class="btn-next" id="submit-btn">See my score &rarr;</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="result">
+      <div class="step-label">Your EU Readiness Score</div>
+      <div class="success-msg" id="success-msg">&#10003; Score sent to your inbox. CORDA will follow up with a detailed breakdown.</div>
+      <div class="result-top">
+        <div class="result-score-wrap">
+          <div><span class="result-score-num" id="res-num">0</span><span class="result-score-den">/100</span></div>
+          <div class="result-band" id="res-band">—</div>
+        </div>
+        <div class="result-intro">
+          <h3 id="res-headline">Calculating…</h3>
+          <p id="res-body"></p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="dim-rows" id="dim-rows"></div>
+      <div class="divider"></div>
+      <a href="mailto:hello@corda.ai?subject=CORDA%20Roadmap%20Enquiry" class="result-cta">Get your full market entry roadmap &rarr;</a>
+      <p class="result-note">A CORDA market entry roadmap covers your full compliance map, a curated importer shortlist, pricing analysis, and a sample routing to three European buyers.<br>From <strong>€7,500</strong> · Delivered in 4 to 6 weeks.</p>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /wrap -->
+</main>
+
+<script>
+// ── STATE ──────────────────────────────────────────────
+const A = {
+  category: null,
+  processing: null,
+  certifications: [],
+  capacity: null,
+  languages: [],
+  nutritional: null,
+  pack_size: null,
+  markets: [],
+  price: null,
+  exporting: null,
+  name: '', company: '', email: ''
+};
+
+const STEPS = 5;
+let current = 1;
+
+// ── PROGRESS ───────────────────────────────────────────
+function updateProgress(step) {
+  const pct = Math.round(((step - 1) / STEPS) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('step-label').textContent = 'Step ' + step + ' of ' + STEPS;
+}
+
+// ── SINGLE-SELECT OPTS ─────────────────────────────────
+function bindSingle(groupId, key, required) {
+  const container = document.getElementById(groupId);
+  if (!container) return;
+  container.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      container.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      A[key] = opt.dataset.val;
+    });
+  });
+}
+
+// ── MULTI-SELECT OPTS ──────────────────────────────────
+function bindMulti(groupId, key) {
+  const container = document.getElementById(groupId);
+  if (!container) return;
+  container.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const val = opt.dataset.val;
+      if (opt.classList.contains('selected')) {
+        opt.classList.remove('selected');
+        A[key] = A[key].filter(v => v !== val);
+      } else {
+        opt.classList.add('selected');
+        if (!A[key].includes(val)) A[key].push(val);
+      }
+    });
+  });
+}
+
+// ── SHOW / HIDE STEP ───────────────────────────────────
+function showStep(n) {
+  for (let i = 1; i <= STEPS; i++) {
+    const el = document.getElementById('s' + i);
+    if (el) el.style.display = i === n ? '' : 'none';
+  }
+  document.getElementById('result').classList.remove('active');
+  current = n;
+  updateProgress(n);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showResult() {
+  for (let i = 1; i <= STEPS; i++) {
+    const el = document.getElementById('s' + i);
+    if (el) el.style.display = 'none';
+  }
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('prog-pct').textContent = '100%';
+  document.getElementById('step-label').textContent = 'Your results';
+  document.getElementById('result').classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showErr(id) {
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 3000); }
+}
+
+// ── SCORING ENGINE ─────────────────────────────────────
+function score(A) {
+  const certs = A.certifications;
+  const hasH = certs.includes('haccp');
+  const hasG = certs.includes('gmp');
+  const hasB = certs.includes('brc');
+  const cat = A.category;
+
+  // 1. Regulatory compliance
+  let reg = 0;
+  if (hasH && hasG) reg += 14; else if (hasH) reg += 10; else if (hasG) reg += 6; else reg += 1;
+  const pm = A.processing;
+  if (['pasteurised','freeze_dried'].includes(pm)) reg += 4;
+  else if (pm === 'smoked') reg += 2;
+  else if (['raw','fermented'].includes(pm)) reg += 1;
+  else reg += 2;
+  reg = Math.min(20, reg);
+
+  // 2. Labelling
+  let lab = 0;
+  if (A.languages.includes('english')) lab += 8;
+  if (A.nutritional === 'complete') lab += 8;
+  else if (A.nutritional === 'partial') lab += 4;
+  if (A.pack_size === 'mid') lab += 4; else lab += 2;
+  lab = Math.min(20, lab);
+
+  // 3. Commercial
+  let comm = 0;
+  const p = A.price;
+  if (p === 'mid') comm += 16;
+  else if (p === 'premium') comm += 18;
+  else if (p === 'value') comm += 10;
+  else if (p === 'low') comm += 5;
+  else comm += 8;
+  if (A.pack_size === 'mid') comm += 2;
+  comm = Math.min(20, comm);
+
+  // 4. Operational
+  let ops = 0;
+  const c = A.capacity;
+  if (c === 'over_20000') ops += 16; else if (c === '5000_20000') ops += 12;
+  else if (c === '1000_5000') ops += 7; else ops += 2;
+  if (A.exporting === 'yes') ops += 4;
+  ops = Math.min(20, ops);
+
+  // 5. Market fit
+  let mkt = 0;
+  const mkts = A.markets;
+  if (mkts.includes('netherlands')) mkt += 8;
+  else if (mkts.some(m => ['germany','france'].includes(m))) mkt += 6;
+  else if (mkts.includes('uk')) mkt += 4;
+  else if (mkts.length > 0) mkt += 3;
+  const trend = {condiment:8,beverage:6,snack:7,ready_meal:5,fermented:7,other:5};
+  mkt += (trend[cat] || 5);
+  mkt = Math.min(20, mkt);
+
+  // 6. Certification gap
+  let certg = 0;
+  if (hasH) certg += 7; if (hasG) certg += 5; if (hasB) certg += 6;
+  if (certs.includes('halal') || certs.includes('organic')) certg += 2;
+  certg = Math.min(20, certg);
+
+  const dims = [
+    {label:'Regulatory compliance', val:reg},
+    {label:'Labelling & documentation', val:lab},
+    {label:'Commercial viability', val:comm},
+    {label:'Operational scalability', val:ops},
+    {label:'Market fit', val:mkt},
+    {label:'Certification gap', val:certg}
+  ];
+  const total = dims.reduce((s, d) => s + d.val, 0);
+  let band = 'Not ready';
+  if (total >= 80) band = 'Strong';
+  else if (total >= 60) band = 'Near ready';
+  else if (total >= 40) band = 'Needs work';
+  return {total, dims, band};
+}
+
+// ── RENDER RESULT ──────────────────────────────────────
+function renderResult(r) {
+  const bandClass = {Strong:'band-strong','Near ready':'band-near','Needs work':'band-needs','Not ready':'band-not'};
+  const bandEl = document.getElementById('res-band');
+  bandEl.textContent = r.band;
+  bandEl.className = 'result-band ' + (bandClass[r.band] || 'band-not');
+
+  const headlines = {
+    Strong:'Your product is well-positioned for EU entry.',
+    'Near ready':'Your product has real potential — a few gaps to address.',
+    'Needs work':'Meaningful work required before EU entry is viable.',
+    'Not ready':'This product needs significant preparation for the EU market.'
+  };
+  const bodies = {
+    Strong:'Your score puts you in the top tier for EU readiness. A market entry roadmap will identify the specific corridor and importers best matched to your product.',
+    'Near ready':'The fundamentals are there. CORDA can close the remaining gaps quickly with a targeted roadmap and compliance review.',
+    'Needs work':'The barriers are real but surmountable. A structured CORDA roadmap will prioritise the changes that deliver the most EU market access the fastest.',
+    'Not ready':'Entering the EU without addressing core gaps risks costly mistakes. CORDA can map the path to readiness before you invest further.'
+  };
+  document.getElementById('res-headline').textContent = headlines[r.band] || '';
+  document.getElementById('res-body').textContent = bodies[r.band] || '';
+
+  const dimRows = document.getElementById('dim-rows');
+  dimRows.innerHTML = '';
+  r.dims.forEach(d => {
+    const pct = Math.round((d.val / 20) * 100);
+    const cls = pct < 40 ? 'bar-f vlow' : pct < 60 ? 'bar-f low' : 'bar-f';
+    dimRows.innerHTML += `<div class="dim-row">
+      <span class="dim-name">${d.label}</span>
+      <div class="bar-track"><div class="${cls}" data-w="${pct}"></div></div>
+      <span class="dim-val">${d.val}/20</span>
+    </div>`;
+  });
+
+  // animate counter
+  let start = null;
+  const numEl = document.getElementById('res-num');
+  function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / 1400, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    numEl.textContent = Math.round(e * r.total);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+
+  // animate bars
+  setTimeout(() => {
+    dimRows.querySelectorAll('.bar-f').forEach(b => { b.style.width = b.dataset.w + '%'; });
+  }, 300);
+}
+
+// ── SUBMIT ─────────────────────────────────────────────
+function submitAndScore() {
+  A.name = document.getElementById('inp-name').value.trim();
+  A.company = document.getElementById('inp-company').value.trim();
+  A.email = document.getElementById('inp-email').value.trim();
+  if (!A.name || !A.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(A.email)) {
+    showErr('err-contact'); return;
+  }
+  const r = score(A);
+  showResult();
+  renderResult(r);
+
+  // Send to Formspree (replace YOUR_FORM_ID with your actual Formspree endpoint)
+  // 1. Go to formspree.io → New form → copy the form ID
+  // 2. Replace YOUR_FORM_ID below
+  const FORMSPREE = 'https://formspree.io/f/YOUR_FORM_ID';
+  if (!FORMSPREE.includes('YOUR_FORM_ID')) {
+    fetch(FORMSPREE, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        name: A.name, company: A.company, email: A.email,
+        category: A.category, score: r.total, band: r.band,
+        processing: A.processing, certifications: A.certifications.join(', '),
+        capacity: A.capacity, markets: A.markets.join(', '),
+        price: A.price, exporting: A.exporting
+      })
+    }).then(res => {
+      if (res.ok) document.getElementById('success-msg').classList.add('show');
+    }).catch(() => {});
+  }
+}
+
+// ── WIRE UP ────────────────────────────────────────────
+bindSingle('category-opts','category',true);
+bindSingle('process-opts','processing',true);
+bindMulti('cert-opts','certifications');
+bindSingle('cap-opts','capacity',true);
+bindMulti('lang-opts','languages');
+bindSingle('nutri-opts','nutritional',true);
+bindSingle('pack-opts','pack_size',true);
+bindMulti('market-opts','markets');
+bindSingle('price-opts','price',true);
+bindSingle('export-opts','exporting',true);
+
+document.getElementById('next1').addEventListener('click', () => {
+  if (!A.category) { showErr('err-cat'); return; }
+  showStep(2);
+});
+document.getElementById('back2').addEventListener('click', () => showStep(1));
+document.getElementById('next2').addEventListener('click', () => {
+  if (!A.processing) { showErr('err-proc'); return; }
+  if (!A.capacity) { showErr('err-cap'); return; }
+  showStep(3);
+});
+document.getElementById('back3').addEventListener('click', () => showStep(2));
+document.getElementById('next3').addEventListener('click', () => {
+  if (!A.nutritional) { showErr('err-nutri'); return; }
+  if (!A.pack_size) { showErr('err-pack'); return; }
+  showStep(4);
+});
+document.getElementById('back4').addEventListener('click', () => showStep(3));
+document.getElementById('next4').addEventListener('click', () => {
+  if (!A.price) { showErr('err-price'); return; }
+  if (!A.exporting) { showErr('err-exp'); return; }
+  showStep(5);
+});
+document.getElementById('back5').addEventListener('click', () => showStep(4));
+document.getElementById('submit-btn').addEventListener('click', submitAndScore);
+
+// init
+updateProgress(1);
+</script>
+</body>
+</html>
