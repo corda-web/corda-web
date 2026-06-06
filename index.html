@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORDA AI — EU Readiness Score for ASEAN F&B Producers</title>
+<meta name="description" content="Get your free EU Readiness Score in 12 minutes. Specific to your product, your corridor, your next step.">
+<meta property="og:title" content="CORDA AI — EU Readiness Score">
+<meta property="og:description" content="Specific country. Specific product. Specific next step.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #4358F5;
+  --blue-dark: #3347d4;
+  --graphite: #0C0E16;
+  --offwhite: #F2F1EC;
+  --lightgrey: #E6E4E0;
+  --taupe: #6E685D;
+  --white: #FFFFFF;
+  --font: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--offwhite);
+  color: var(--graphite);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(242, 241, 236, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--lightgrey); }
+.nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--graphite);
+}
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+.logo-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--graphite);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-link {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--taupe);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--graphite); }
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, transform 0.15s;
+  border-radius: 4px;
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.btn-primary-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--graphite);
+  border: 1px solid var(--graphite);
+  padding: 13px 27px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+.btn-ghost:hover { background: rgba(12,14,22,0.06); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 24px 80px;
+}
+.hero-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 24px;
+}
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.headline {
+  font-size: clamp(44px, 5.5vw, 72px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--graphite);
+  margin-bottom: 24px;
+}
+.headline em {
+  font-style: normal;
+  color: var(--blue);
+}
+.subhead {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--taupe);
+  max-width: 460px;
+  margin-bottom: 40px;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--taupe);
+}
+.hero-note span { color: var(--graphite); font-weight: 500; }
+
+/* SCORECARD CARD */
+.scorecard {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--lightgrey);
+  padding: 28px;
+  box-shadow: 0 4px 40px rgba(12,14,22,0.08), 0 1px 4px rgba(12,14,22,0.04);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: cardIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+@keyframes cardIn {
+  to { transform: translateY(0); opacity: 1; }
+}
+.scorecard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.scorecard-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 4px;
+}
+.scorecard-product {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--graphite);
+}
+.scorecard-corridor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--taupe);
+}
+.score-display {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  margin-bottom: 6px;
+}
+.score-num {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--graphite);
+  letter-spacing: -0.04em;
+}
+.score-denom {
+  font-size: 16px;
+  color: var(--taupe);
+  margin-left: 2px;
+  font-weight: 400;
+}
+.score-band {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #E8F5E9;
+  color: #2E7D32;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+.score-band.potential {
+  background: #FFF8E1;
+  color: #F57F17;
+}
+.divider {
+  height: 1px;
+  background: var(--lightgrey);
+  margin-bottom: 18px;
+}
+.score-rows { display: flex; flex-direction: column; gap: 11px; }
+.score-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+.score-row-label {
+  font-size: 12px;
+  color: var(--taupe);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.score-row-label span:first-child {
+  font-size: 12px;
+  color: var(--graphite);
+  font-weight: 500;
+}
+.bar-wrap {
+  width: 100px;
+  height: 4px;
+  background: var(--lightgrey);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--blue);
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.bar-fill.amber { background: #F59E0B; }
+.score-row-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--graphite);
+  min-width: 24px;
+  text-align: right;
+}
+
+/* PROOF STRIP */
+.proof {
+  background: var(--lightgrey);
+  padding: 18px 24px;
+  overflow: hidden;
+}
+.proof-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.proof-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  white-space: nowrap;
+}
+.proof-items {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.proof-item {
+  font-size: 13px;
+  color: var(--taupe);
+  padding: 0 16px;
+  border-right: 1px solid rgba(110,104,93,0.3);
+}
+.proof-item:first-child { padding-left: 0; }
+.proof-item:last-child { border-right: none; }
+
+/* HOW IT WORKS */
+.how {
+  padding: 100px 24px;
+  background: var(--offwhite);
+}
+.section-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--graphite);
+  margin-bottom: 60px;
+  max-width: 520px;
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--lightgrey);
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.how-step {
+  background: var(--offwhite);
+  padding: 40px 36px;
+  position: relative;
+}
+.step-num {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+.step-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--graphite);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.step-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--taupe);
+}
+.step-detail {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--lightgrey);
+  font-size: 12px;
+  color: var(--taupe);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.step-detail-item::before {
+  content: '+ ';
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* WHAT YOU GET */
+.what {
+  padding: 100px 24px;
+  background: var(--white);
+}
+.what-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 0;
+}
+.what-card {
+  padding: 36px;
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  background: var(--offwhite);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.what-card.visible { opacity: 1; transform: translateY(0); }
+.what-card:nth-child(2) { transition-delay: 0.1s; }
+.what-card:nth-child(3) { transition-delay: 0.2s; }
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--blue);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.card-icon svg { color: white; }
+.card-price {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--graphite);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.card-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--taupe);
+}
+
+/* CTA SECTION */
+.cta-section {
+  background: var(--graphite);
+  padding: 100px 24px;
+  text-align: center;
+}
+.cta-section .section-tag { color: rgba(255,255,255,0.45); margin-bottom: 20px; }
+.cta-section .section-title { color: var(--white); margin: 0 auto 16px; max-width: 600px; }
+.cta-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.cta-note {
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+.btn-primary-white {
+  background: var(--white);
+  color: var(--graphite);
+  border: none;
+  padding: 14px 28px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+  border-radius: 4px;
+}
+.btn-primary-white:hover { background: var(--offwhite); transform: translateY(-1px); }
+
+/* FOOTER */
+footer {
+  background: var(--graphite);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 40px 24px;
+}
+.footer-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.footer-logo .logo-text { color: rgba(255,255,255,0.7); }
+.footer-meta {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.footer-meta a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-meta a:hover { color: rgba(255,255,255,0.75); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .scorecard { max-width: 380px; }
+  .how-steps { grid-template-columns: 1fr; }
+  .how-step { border-bottom: 1px solid var(--lightgrey); }
+  .what-grid { grid-template-columns: 1fr; }
+  .nav-link { display: none; }
+}
+@media (max-width: 560px) {
+  .headline { font-size: 38px; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+}
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="6" fill="#4358F5"/>
+        <circle cx="16" cy="16" r="9" stroke="white" stroke-width="1.5" fill="none"/>
+        <ellipse cx="16" cy="16" rx="9" ry="3.2" stroke="white" stroke-width="1.5" fill="none"/>
+        <line x1="16" y1="7" x2="16" y2="25" stroke="white" stroke-width="1.5"/>
+        <line x1="7" y1="16" x2="25" y2="16" stroke="white" stroke-width="1.5"/>
+      </svg>
+      <span class="logo-text">CORDA</span>
+    </a>
+    <div class="nav-right">
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#what" class="nav-link">Pricing</a>
+      <a href="/assessment" class="btn-primary">Get free score</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge">Export intelligence</div>
+      <h1 class="headline">Europe is not<br>one <em>market.</em></h1>
+      <p class="subhead">Specific country. Specific product. Specific friction. Get your free EU readiness score in 12 minutes and know exactly where your product stands.</p>
+      <div class="hero-ctas">
+        <a href="/assessment" class="btn-primary btn-primary-lg">Get your free score &rarr;</a>
+        <a href="#how" class="btn-ghost">See how it works</a>
+      </div>
+      <p class="hero-note"><span>12 minutes.</span> Free. No sales call required.</p>
+    </div>
+    <div class="hero-visual">
+      <div class="scorecard" id="scorecard">
+        <div class="scorecard-top">
+          <div>
+            <div class="scorecard-label">EU Readiness Score</div>
+            <div class="scorecard-product">Sambal Bu Rudy</div>
+          </div>
+          <div class="scorecard-corridor">
+            <span>&#127475;&#127473;</span>
+            <span>Netherlands</span>
+          </div>
+        </div>
+        <div class="score-display">
+          <span class="score-num" id="score-counter">0</span>
+          <span class="score-denom">&thinsp;/100</span>
+        </div>
+        <div class="score-band potential">Near ready</div>
+        <div class="divider"></div>
+        <div class="score-rows" id="score-rows">
+          <div class="score-row">
+            <div class="score-row-label"><span>Compliance</span></div>
+            <div class="bar-wrap"><div class="bar-fill" data-width="79"></div></div>
+            <div class="score-row-value">79</div>
+          </div>
+          <div class="score-row">
+            <div class="score-row-label"><span>Labelling</span></div>
+            <div class="bar-wrap"><div class="bar-fill" data-width="68"></div></div>
+            <div class="score-row-value">68</div>
+          </div>
+          <div class="score-row">
+            <div class="score-row-label"><span>Commercial</span></div>
+            <div class="bar-wrap"><div class="bar-fill" data-width="82"></div></div>
+            <div class="score-row-value">82</div>
+          </div>
+          <div class="score-row">
+            <div class="score-row-label"><span>Operational</span></div>
+            <div class="bar-wrap"><div class="bar-fill" data-width="71"></div></div>
+            <div class="score-row-value">71</div>
+          </div>
+          <div class="score-row">
+            <div class="score-row-label"><span>Market fit</span></div>
+            <div class="bar-wrap"><div class="bar-fill" data-width="85"></div></div>
+            <div class="score-row-value">85</div>
+          </div>
+          <div class="score-row">
+            <div class="score-row-label"><span>Certification</span></div>
+            <div class="bar-wrap"><div class="bar-fill amber" data-width="55"></div></div>
+            <div class="score-row-value">55</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof">
+  <div class="proof-inner">
+    <span class="proof-label">Built for producers in</span>
+    <div class="proof-items">
+      <span class="proof-item">Indonesia</span>
+      <span class="proof-item">Malaysia</span>
+      <span class="proof-item">Thailand</span>
+      <span class="proof-item">Vietnam</span>
+      <span class="proof-item">Philippines</span>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-title">From score to market in three steps.</h2>
+    <div class="how-steps">
+      <div class="how-step fade-in">
+        <div class="step-num">01</div>
+        <div class="step-title">Take the free score</div>
+        <div class="step-body">Fill in 12 minutes. CORDA scores your product across six EU readiness dimensions and tells you where you stand.</div>
+        <div class="step-detail">
+          <span class="step-detail-item">Regulatory compliance</span>
+          <span class="step-detail-item">Labelling readiness</span>
+          <span class="step-detail-item">Commercial viability</span>
+          <span class="step-detail-item">Market fit by corridor</span>
+        </div>
+      </div>
+      <div class="how-step fade-in">
+        <div class="step-num">02</div>
+        <div class="step-title">Get your roadmap</div>
+        <div class="step-body">The full market entry roadmap. Compliance map, importer shortlist, pricing guide, and sample routing to buyers. Specific to your product and your corridor.</div>
+        <div class="step-detail">
+          <span class="step-detail-item">EU compliance checklist</span>
+          <span class="step-detail-item">Curated importer list</span>
+          <span class="step-detail-item">Pricing analysis</span>
+          <span class="step-detail-item">90-min strategy call</span>
+        </div>
+      </div>
+      <div class="how-step fade-in">
+        <div class="step-num">03</div>
+        <div class="step-title">Enter the market</div>
+        <div class="step-body">Warm introductions to the right importers. CORDA manages the follow-through so conversations do not go cold.</div>
+        <div class="step-detail">
+          <span class="step-detail-item">Warm importer introductions</span>
+          <span class="step-detail-item">4-month facilitation</span>
+          <span class="step-detail-item">Monthly market intelligence</span>
+          <span class="step-detail-item">Wave 2 market expansion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="what" id="what">
+  <div class="section-inner">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Start free. Scale when you are ready.</h2>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.5"/><path d="M10 6v4l3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-price">Free</div>
+        <div class="card-title">EU Readiness Score</div>
+        <div class="card-body">12-minute assessment. Six-dimension score. PDF report delivered to your inbox. Know if your product is ready before you spend on compliance.</div>
+      </div>
+      <div class="what-card">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="white" stroke-width="1.5"/><path d="M7 10h6M7 7h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-price">From &euro;7,500</div>
+        <div class="card-title">Market Entry Roadmap</div>
+        <div class="card-body">Full compliance map, importer shortlist, packaging spec, pricing guide, and sample routing to three European buyers. 90-minute strategy call included.</div>
+      </div>
+      <div class="what-card">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="white" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="1" fill="white"/></svg>
+        </div>
+        <div class="card-price">&euro;250 / month</div>
+        <div class="card-title">EU Market Intelligence</div>
+        <div class="card-body">Monthly digest of regulatory changes, competitor movements, and importer news specific to your product category and target corridor. Stay ahead.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-tag">Ready to score your product?</div>
+  <h2 class="section-title">Corda scores corridors,<br>not continents.</h2>
+  <p class="cta-sub">12 minutes. Free. Specific to your product and your corridor.</p>
+  <a href="/assessment" class="btn-primary-white">Get your free score &rarr;</a>
+  <p class="cta-note">No sign-up required &nbsp;&middot;&nbsp; PDF report delivered instantly &nbsp;&middot;&nbsp; No sales call</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo logo">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="6" fill="#4358F5"/>
+        <circle cx="16" cy="16" r="9" stroke="white" stroke-width="1.5" fill="none"/>
+        <ellipse cx="16" cy="16" rx="9" ry="3.2" stroke="white" stroke-width="1.5" fill="none"/>
+        <line x1="16" y1="7" x2="16" y2="25" stroke="white" stroke-width="1.5"/>
+        <line x1="7" y1="16" x2="25" y2="16" stroke="white" stroke-width="1.5"/>
+      </svg>
+      <span class="logo-text">CORDA</span>
+    </a>
+    <div class="footer-meta">
+      <span>&copy; 2026 CORDA AI</span>
+      <a href="mailto:hello@corda.ai">hello@corda.ai</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// Score counter animation
+function animateCounter(el, target, duration) {
+  let start = null;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Animate bars
+function animateBars() {
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    const w = bar.dataset.width;
+    setTimeout(() => { bar.style.width = w + '%'; }, 200);
+  });
+}
+
+// Start animations after a small delay
+setTimeout(() => {
+  animateCounter(document.getElementById('score-counter'), 73, 1400);
+  animateBars();
+}, 700);
+
+// Intersection observer for fade-ins
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .what-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
