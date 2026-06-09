@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU Readiness Score — CORDA AI</title>
+<meta name="description" content="Get your free EU Readiness Score in 12 minutes. Specific to your product, your corridor, your next step.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue: #4358F5;
+  --blue-dark: #3347d4;
+  --blue-light: #EEF0FE;
+  --graphite: #0C0E16;
+  --offwhite: #F2F1EC;
+  --lightgrey: #E6E4E0;
+  --taupe: #6E685D;
+  --white: #FFFFFF;
+  --green: #1D9E75;
+  --green-light: #E6F5F0;
+  --green-dark: #0F6E56;
+  --amber: #D97706;
+  --amber-light: #FEF3C7;
+  --red: #DC2626;
+  --red-light: #FEE2E2;
+  --font: 'Inter', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--offwhite); color: var(--graphite); -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav {
+  height: 64px;
+  background: var(--offwhite);
+  border-bottom: 1px solid var(--lightgrey);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--graphite);
+}
+.logo-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--graphite);
+}
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--lightgrey);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--taupe);
+  transition: all 0.15s;
+}
+.lang-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+.lang-btn:not(.active):hover {
+  border-color: var(--graphite);
+  color: var(--graphite);
+}
+.back-link {
+  font-size: 13px;
+  color: var(--taupe);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--graphite); }
+
+/* PAGE WRAPPER */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* PROGRESS */
+.progress-header {
+  margin-bottom: 36px;
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.progress-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--graphite);
+}
+.progress-step {
+  font-size: 12px;
+  color: var(--taupe);
+}
+.progress-track {
+  height: 3px;
+  background: var(--lightgrey);
+  border-radius: 2px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+/* SECTIONS */
+.form-section {
+  background: var(--white);
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 20px;
+}
+
+/* FIELDS */
+.field { margin-bottom: 22px; }
+.field:last-child { margin-bottom: 0; }
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--graphite);
+  margin-bottom: 8px;
+}
+.field .hint {
+  font-size: 12px;
+  color: var(--taupe);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+input[type="text"], input[type="number"] {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--lightgrey);
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--graphite);
+  background: var(--white);
+  transition: border-color 0.15s;
+  outline: none;
+}
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(67,88,245,0.1);
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* CHIP GROUPS */
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  background: var(--offwhite);
+  border: 1px solid var(--lightgrey);
+  border-radius: 4px;
+  padding: 7px 13px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--blue); color: var(--blue); }
+.chip.selected {
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
+  font-weight: 500;
+}
+
+/* BUTTONS */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  align-items: center;
+}
+.btn-next {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 11px 24px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-next:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.btn-back {
+  background: transparent;
+  color: var(--taupe);
+  border: 1px solid var(--lightgrey);
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-family: var(--font);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-back:hover { border-color: var(--graphite); color: var(--graphite); }
+.btn-submit {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 13px 28px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1;
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-submit:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+/* ────── RESULTS ────── */
+.results-page { display: none; }
+
+/* Score hero */
+.score-hero {
+  background: var(--white);
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  padding: 40px 36px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+.score-left { flex-shrink: 0; text-align: center; }
+.score-ring {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 4px solid var(--blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.score-ring-num {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--graphite);
+}
+.score-ring-denom {
+  font-size: 12px;
+  color: var(--taupe);
+  margin-top: 2px;
+}
+.score-tier {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.score-right { flex: 1; }
+.score-verdict {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--graphite);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.score-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--taupe);
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+.score-dims {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.dim-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+.dim-label {
+  font-size: 12px;
+  color: var(--taupe);
+  font-weight: 500;
+}
+.dim-bar-bg {
+  width: 72px;
+  height: 4px;
+  background: var(--lightgrey);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.dim-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.dim-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--graphite);
+  min-width: 24px;
+  text-align: right;
+}
+
+/* Findings */
+.findings-section {
+  background: var(--white);
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.findings-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 20px;
+}
+.finding-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--lightgrey);
+  align-items: flex-start;
+}
+.finding-item:last-child { border-bottom: none; padding-bottom: 0; }
+.finding-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.finding-icon.warn { background: var(--amber-light); color: var(--amber); }
+.finding-icon.ok   { background: var(--green-light); color: var(--green-dark); }
+.finding-icon.info { background: var(--blue-light); color: var(--blue); }
+.finding-body { flex: 1; }
+.finding-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--graphite);
+  margin-bottom: 3px;
+}
+.finding-detail {
+  font-size: 13px;
+  color: var(--taupe);
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+.finding-corda {
+  font-size: 12px;
+  color: var(--green-dark);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.finding-corda::before {
+  content: 'CORDA: ';
+  font-weight: 700;
+}
+
+/* How CORDA helps */
+.how-section {
+  background: var(--white);
+  border: 1px solid var(--lightgrey);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+.how-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  margin-bottom: 20px;
+}
+.how-step {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--lightgrey);
+  align-items: flex-start;
+}
+.how-step:last-child { border-bottom: none; padding-bottom: 0; }
+.how-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--offwhite);
+  border: 1px solid var(--lightgrey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.how-step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--graphite);
+  margin-bottom: 4px;
+}
+.how-step-body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--taupe);
+}
+
+/* CTA bottom */
+.cta-bottom {
+  background: var(--graphite);
+  border-radius: 8px;
+  padding: 36px 32px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.cta-bottom p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-cta-white {
+  background: var(--white);
+  color: var(--graphite);
+  border: none;
+  border-radius: 4px;
+  padding: 13px 28px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-cta-white:hover { background: var(--offwhite); transform: translateY(-1px); }
+.btn-restart {
+  display: block;
+  margin: 12px auto 0;
+  background: transparent;
+  color: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: var(--font);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-restart:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .score-hero { flex-direction: column; gap: 28px; align-items: center; text-align: center; }
+  .score-dims { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .form-section { padding: 22px 20px; }
+  .findings-section, .how-section, .how-section { padding: 22px 20px; }
+  .cta-bottom { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="6" fill="#4358F5"/>
+        <circle cx="16" cy="16" r="9" stroke="white" stroke-width="1.5" fill="none"/>
+        <ellipse cx="16" cy="16" rx="9" ry="3.2" stroke="white" stroke-width="1.5" fill="none"/>
+        <line x1="16" y1="7" x2="16" y2="25" stroke="white" stroke-width="1.5"/>
+        <line x1="7" y1="16" x2="25" y2="16" stroke="white" stroke-width="1.5"/>
+      </svg>
+      <span class="logo-text">CORDA</span>
+    </a>
+    <div class="nav-center">
+      <button class="lang-btn active" id="btn-id" onclick="setLang('id')">Indonesia</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+    </div>
+    <a href="/" class="back-link" id="t-back">&larr; Kembali</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- FORM VIEW -->
+  <div id="form-view">
+    <div class="progress-header">
+      <div class="progress-meta">
+        <span class="progress-title" id="t-progress-title">Skor Kesiapan Masuk Pasar EU</span>
+        <span class="progress-step" id="t-progress-step">Langkah 1 dari 4</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:25%"></div></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="step-1">
+      <div class="form-section">
+        <div class="section-label" id="t-s1a">Informasi produk</div>
+        <div class="two-col">
+          <div class="field">
+            <label id="t-producer">Nama produsen</label>
+            <input type="text" id="producer_name" placeholder="mis. PT Sumber Rasa" />
+          </div>
+          <div class="field">
+            <label id="t-product">Nama produk</label>
+            <input type="text" id="product_name" placeholder="mis. Sambal Oelek Asli" />
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-category">Kategori produk</label>
+          <div class="chip-group" id="product_category" data-type="radio">
+            <div class="chip" data-val="condiment" id="tc-condiment">Sambal / saus / kondimen</div>
+            <div class="chip" data-val="snack" id="tc-snack">Camilan</div>
+            <div class="chip" data-val="beverage" id="tc-beverage">Minuman</div>
+            <div class="chip" data-val="ready_meal" id="tc-ready">Makanan siap saji</div>
+            <div class="chip" data-val="other" id="tc-other">Lainnya</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-ingredients">Bahan utama</label>
+          <input type="text" id="main_ingredients" placeholder="mis. cabai, cuka, garam, bawang putih" />
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-label" id="t-s1b">Keamanan pangan dan proses</div>
+        <div class="field">
+          <label id="t-processing">Metode pengolahan</label>
+          <div class="chip-group" id="processing_method" data-type="radio">
+            <div class="chip" data-val="pasteurised" id="tp-past">Pasteurisasi</div>
+            <div class="chip" data-val="fermented" id="tp-ferm">Fermentasi</div>
+            <div class="chip" data-val="freeze_dried" id="tp-fd">Freeze-dried</div>
+            <div class="chip" data-val="smoked" id="tp-smoke">Diasap</div>
+            <div class="chip" data-val="raw" id="tp-raw">Mentah / segar</div>
+            <div class="chip" data-val="other" id="tp-other">Lainnya</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-certs">Sertifikasi yang dimiliki</label>
+          <div class="chip-group" id="certifications" data-type="multi">
+            <div class="chip" data-val="haccp">HACCP</div>
+            <div class="chip" data-val="gmp">GMP</div>
+            <div class="chip" data-val="brc">BRC</div>
+            <div class="chip" data-val="ifs">IFS</div>
+            <div class="chip" data-val="fssc22000">FSSC 22000</div>
+            <div class="chip" data-val="halal">Halal</div>
+            <div class="chip" data-val="organic">Organik</div>
+            <div class="chip" data-val="none" id="tc-nocert">Belum ada</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-allergens">Alergen yang terkandung</label>
+          <div class="chip-group" id="allergens" data-type="multi">
+            <div class="chip" data-val="peanuts" id="ta-peanut">Kacang tanah</div>
+            <div class="chip" data-val="tree_nuts" id="ta-treenuts">Kacang pohon</div>
+            <div class="chip" data-val="gluten" id="ta-gluten">Gluten</div>
+            <div class="chip" data-val="dairy" id="ta-dairy">Susu / dairy</div>
+            <div class="chip" data-val="eggs" id="ta-eggs">Telur</div>
+            <div class="chip" data-val="soy" id="ta-soy">Kedelai</div>
+            <div class="chip" data-val="sesame" id="ta-sesame">Wijen</div>
+            <div class="chip" data-val="fish" id="ta-fish">Ikan</div>
+            <div class="chip" data-val="shellfish" id="ta-shell">Kerang / udang</div>
+            <div class="chip" data-val="none" id="ta-none">Tidak ada</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-next" onclick="goStep(2)" id="t-next1">Lanjut &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step-2" style="display:none">
+      <div class="form-section">
+        <div class="section-label" id="t-s2">Label dan dokumentasi</div>
+        <div class="field">
+          <label id="t-langs">Bahasa pada label kemasan</label>
+          <div class="chip-group" id="label_languages" data-type="multi">
+            <div class="chip" data-val="english" id="tl-en">Inggris</div>
+            <div class="chip" data-val="indonesian" id="tl-id">Indonesia</div>
+            <div class="chip" data-val="dutch" id="tl-nl">Belanda</div>
+            <div class="chip" data-val="german" id="tl-de">Jerman</div>
+            <div class="chip" data-val="chinese" id="tl-zh">Mandarin</div>
+            <div class="chip" data-val="other" id="tl-other">Lainnya</div>
+            <div class="chip" data-val="none" id="tl-none">Belum ada</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-nutri">Kemasan mencantumkan informasi gizi?</label>
+          <div class="chip-group" id="nutritional_info_on_pack" data-type="radio">
+            <div class="chip" data-val="true" id="tn-yes">Ya</div>
+            <div class="chip" data-val="false" id="tn-no">Belum</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-adecl">Informasi alergen sudah dideklarasikan dengan benar di kemasan?</label>
+          <div class="chip-group" id="allergens_declared" data-type="radio">
+            <div class="chip" data-val="true" id="tad-yes">Ya</div>
+            <div class="chip" data-val="false" id="tad-no">Belum / tidak yakin</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-inglist">Daftar bahan lengkap tersedia?</label>
+          <div class="chip-group" id="ingredients_list" data-type="radio">
+            <div class="chip" data-val="true" id="til-yes">Ya</div>
+            <div class="chip" data-val="false" id="til-no">Belum</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(1)" id="t-back2">&larr; Kembali</button>
+        <button class="btn-next" onclick="goStep(3)" id="t-next2">Lanjut &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step-3" style="display:none">
+      <div class="form-section">
+        <div class="section-label" id="t-s3">Informasi komersial</div>
+        <div class="two-col">
+          <div class="field">
+            <label id="t-price">Harga ex-works (EUR)</label>
+            <input type="number" id="ex_works_price" placeholder="mis. 3.50" min="0" step="0.01" />
+            <div class="hint" id="t-price-hint">Per unit, bukan per 100g</div>
+          </div>
+          <div class="field">
+            <label id="t-packsize">Ukuran kemasan (gram)</label>
+            <input type="number" id="pack_size" placeholder="mis. 250" min="1" step="1" />
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-capacity">Kapasitas produksi per bulan</label>
+          <div class="chip-group" id="monthly_capacity" data-type="radio">
+            <div class="chip" data-val="under_1000" id="tmc-u1k">Di bawah 1.000 unit</div>
+            <div class="chip" data-val="between_1000_5000" id="tmc-1-5k">1.000 – 5.000</div>
+            <div class="chip" data-val="between_5000_20000" id="tmc-5-20k">5.000 – 20.000</div>
+            <div class="chip" data-val="over_20000" id="tmc-20k">Di atas 20.000</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-budget">Anggaran untuk masuk pasar EU</label>
+          <div class="chip-group" id="budget_eur" data-type="radio">
+            <div class="chip" data-val="under_5k" id="tb-u5">Di bawah €5.000</div>
+            <div class="chip" data-val="between_5k_15k" id="tb-5-15">€5.000 – €15.000</div>
+            <div class="chip" data-val="between_15k_30k" id="tb-15-30">€15.000 – €30.000</div>
+            <div class="chip" data-val="over_30k" id="tb-30">Di atas €30.000</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(2)" id="t-back3">&larr; Kembali</button>
+        <button class="btn-next" onclick="goStep(4)" id="t-next3">Lanjut &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div id="step-4" style="display:none">
+      <div class="form-section">
+        <div class="section-label" id="t-s4">Operasional dan pasar</div>
+        <div class="field">
+          <label id="t-markets">Target pasar EU</label>
+          <div class="chip-group" id="target_eu_markets" data-type="multi">
+            <div class="chip" data-val="netherlands">Belanda</div>
+            <div class="chip" data-val="germany">Jerman</div>
+            <div class="chip" data-val="france">Prancis</div>
+            <div class="chip" data-val="uk">Inggris</div>
+            <div class="chip" data-val="sweden">Swedia</div>
+            <div class="chip" data-val="other" id="tm-other">Lainnya</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-exporting">Apakah sudah mengekspor ke pasar manapun?</label>
+          <div class="chip-group" id="currently_exporting" data-type="radio">
+            <div class="chip" data-val="true" id="te-yes">Ya, sudah</div>
+            <div class="chip" data-val="false" id="te-no">Belum</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-leadtime">Lead time produksi yang umum</label>
+          <div class="chip-group" id="lead_time" data-type="radio">
+            <div class="chip" data-val="30" id="tlt-30">Hingga 30 hari</div>
+            <div class="chip" data-val="60" id="tlt-60">31 – 60 hari</div>
+            <div class="chip" data-val="90" id="tlt-90">61 – 90 hari</div>
+            <div class="chip" data-val="91" id="tlt-91">Lebih dari 90 hari</div>
+          </div>
+        </div>
+        <div class="field">
+          <label id="t-audit">Audit pabrik atau keamanan pangan terakhir</label>
+          <div class="chip-group" id="factory_audit" data-type="radio">
+            <div class="chip" data-val="recent" id="tfa-recent">Dalam 2 tahun terakhir</div>
+            <div class="chip" data-val="older" id="tfa-older">Lebih dari 2 tahun lalu</div>
+            <div class="chip" data-val="never" id="tfa-never">Belum pernah diaudit</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-back" onclick="goStep(3)" id="t-back4">&larr; Kembali</button>
+        <button class="btn-submit" onclick="calculate()" id="t-submit">Hitung skor saya &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS VIEW -->
+  <div id="results-view" style="display:none">
+
+    <div class="score-hero">
+      <div class="score-left">
+        <div class="score-ring" id="r-ring">
+          <div class="score-ring-num" id="r-num">--</div>
+          <div class="score-ring-denom" id="t-outof">dari 100</div>
+        </div>
+        <span class="score-tier" id="r-tier"></span>
+      </div>
+      <div class="score-right">
+        <div class="score-verdict" id="r-verdict"></div>
+        <div class="score-desc" id="r-desc"></div>
+        <div class="score-dims" id="r-dims"></div>
+      </div>
+    </div>
+
+    <div class="findings-section">
+      <div class="findings-title" id="t-findings">Temuan utama dan rekomendasi</div>
+      <div id="r-findings"></div>
+    </div>
+
+    <div class="how-section">
+      <div class="how-title" id="t-howhelp">Bagaimana CORDA membantu dari sini</div>
+      <div id="r-how"></div>
+    </div>
+
+    <div class="cta-bottom">
+      <p id="t-cta-p">Skor ini gratis. Langkah selanjutnya adalah Market Entry Roadmap — analisis gap compliance lengkap, shortlist importir, dan rencana aksi 90 hari khusus untuk produk Anda.</p>
+      <a href="mailto:hello@corda.ai" class="btn-cta-white" id="t-cta-btn">Hubungi CORDA &rarr;</a>
+      <button class="btn-restart" onclick="restart()" id="t-restart">Jalankan penilaian lain</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─── STATE ───
+const S = {
+  product_category:null, processing_method:null, certifications:[],
+  allergens:[], label_languages:[], nutritional_info_on_pack:null,
+  allergens_declared:null, ingredients_list:null, monthly_capacity:null,
+  budget_eur:null, target_eu_markets:[], currently_exporting:null,
+  lead_time:null, factory_audit:null
+};
+
+let lang = 'id';
+
+// ─── TRANSLATIONS ───
+const TR = {
+  en: {
+    'back':'← Back','progress-title':'EU Entry Readiness Score',
+    's1-step':'Step 1 of 4 — Product basics','s2-step':'Step 2 of 4 — Labelling & docs',
+    's3-step':'Step 3 of 4 — Commercial details','s4-step':'Step 4 of 4 — Operations & market',
+    's1a':'Product basics','s1b':'Food safety & processing',
+    'producer':'Producer name','product':'Product name',
+    'category':'Product category',
+    'tc-condiment':'Condiment / sauce / sambal','tc-snack':'Snack','tc-beverage':'Beverage','tc-ready':'Ready meal','tc-other':'Other',
+    'ingredients':'Main ingredients',
+    'processing':'Processing method',
+    'tp-past':'Pasteurised','tp-ferm':'Fermented','tp-fd':'Freeze-dried','tp-smoke':'Smoked','tp-raw':'Raw / fresh','tp-other':'Other',
+    'certs':'Certifications held','tc-nocert':'None yet',
+    'allergens':'Allergens present',
+    'ta-peanut':'Peanuts','ta-treenuts':'Tree nuts','ta-gluten':'Gluten','ta-dairy':'Dairy',
+    'ta-eggs':'Eggs','ta-soy':'Soy','ta-sesame':'Sesame','ta-fish':'Fish','ta-shell':'Shellfish','ta-none':'None',
+    's2':'Labelling & documentation',
+    'langs':'Languages on label',
+    'tl-en':'English','tl-id':'Indonesian','tl-nl':'Dutch','tl-de':'German','tl-zh':'Chinese','tl-other':'Other','tl-none':'None / TBD',
+    'nutri':'Nutritional information on pack?','tn-yes':'Yes','tn-no':'Not yet',
+    'adecl':'Allergens correctly declared on pack?','tad-yes':'Yes','tad-no':'No / not sure',
+    'inglist':'Full ingredients list available?','til-yes':'Yes','til-no':'Not yet',
+    's3':'Commercial details',
+    'price':'Ex-works price (EUR)','price-hint':'Per unit, not per 100g','packsize':'Pack size (grams)',
+    'capacity':'Monthly production capacity',
+    'tmc-u1k':'Under 1,000 units','tmc-1-5k':'1,000 – 5,000','tmc-5-20k':'5,000 – 20,000','tmc-20k':'Over 20,000',
+    'budget':'Budget for EU market entry',
+    'tb-u5':'Under €5,000','tb-5-15':'€5,000 – €15,000','tb-15-30':'€15,000 – €30,000','tb-30':'Over €30,000',
+    's4':'Operations & market',
+    'markets':'Target EU markets','tm-other':'Other',
+    'exporting':'Currently exporting to any market?','te-yes':'Yes, already','te-no':'Not yet',
+    'leadtime':'Typical production lead time',
+    'tlt-30':'Up to 30 days','tlt-60':'31 – 60 days','tlt-90':'61 – 90 days','tlt-91':'Over 90 days',
+    'audit':'Last factory or food safety audit',
+    'tfa-recent':'Within the last 2 years','tfa-older':'More than 2 years ago','tfa-never':'Never audited',
+    'back2':'← Back','back3':'← Back','back4':'← Back',
+    'next1':'Continue →','next2':'Continue →','next3':'Continue →','submit':'Generate my score →',
+    'outof':'out of 100','findings':'Key findings and recommendations','howhelp':'How CORDA helps from here',
+    'cta-p':'This score is free. The next step is the Market Entry Roadmap — full compliance gap analysis, importer shortlist, and a 90-day action plan specific to your product.',
+    'cta-btn':'Contact CORDA →','restart':'Run another assessment'
+  },
+  id: {
+    'back':'← Kembali','progress-title':'Skor Kesiapan Masuk Pasar EU',
+    's1-step':'Langkah 1 dari 4 — Informasi produk','s2-step':'Langkah 2 dari 4 — Label & dokumentasi',
+    's3-step':'Langkah 3 dari 4 — Informasi komersial','s4-step':'Langkah 4 dari 4 — Operasional & pasar',
+    's1a':'Informasi produk','s1b':'Keamanan pangan dan proses',
+    'producer':'Nama produsen','product':'Nama produk',
+    'category':'Kategori produk',
+    'tc-condiment':'Sambal / saus / kondimen','tc-snack':'Camilan','tc-beverage':'Minuman','tc-ready':'Makanan siap saji','tc-other':'Lainnya',
+    'ingredients':'Bahan utama',
+    'processing':'Metode pengolahan',
+    'tp-past':'Pasteurisasi','tp-ferm':'Fermentasi','tp-fd':'Freeze-dried','tp-smoke':'Diasap','tp-raw':'Mentah / segar','tp-other':'Lainnya',
+    'certs':'Sertifikasi yang dimiliki','tc-nocert':'Belum ada',
+    'allergens':'Alergen yang terkandung',
+    'ta-peanut':'Kacang tanah','ta-treenuts':'Kacang pohon','ta-gluten':'Gluten','ta-dairy':'Susu / dairy',
+    'ta-eggs':'Telur','ta-soy':'Kedelai','ta-sesame':'Wijen','ta-fish':'Ikan','ta-shell':'Kerang / udang','ta-none':'Tidak ada',
+    's2':'Label dan dokumentasi',
+    'langs':'Bahasa pada label kemasan',
+    'tl-en':'Inggris','tl-id':'Indonesia','tl-nl':'Belanda','tl-de':'Jerman','tl-zh':'Mandarin','tl-other':'Lainnya','tl-none':'Belum ada',
+    'nutri':'Kemasan mencantumkan informasi gizi?','tn-yes':'Ya','tn-no':'Belum',
+    'adecl':'Informasi alergen sudah dideklarasikan dengan benar?','tad-yes':'Ya','tad-no':'Belum / tidak yakin',
+    'inglist':'Daftar bahan lengkap tersedia?','til-yes':'Ya','til-no':'Belum',
+    's3':'Informasi komersial',
+    'price':'Harga ex-works (EUR)','price-hint':'Per unit, bukan per 100g','packsize':'Ukuran kemasan (gram)',
+    'capacity':'Kapasitas produksi per bulan',
+    'tmc-u1k':'Di bawah 1.000 unit','tmc-1-5k':'1.000 – 5.000','tmc-5-20k':'5.000 – 20.000','tmc-20k':'Di atas 20.000',
+    'budget':'Anggaran untuk masuk pasar EU',
+    'tb-u5':'Di bawah €5.000','tb-5-15':'€5.000 – €15.000','tb-15-30':'€15.000 – €30.000','tb-30':'Di atas €30.000',
+    's4':'Operasional dan pasar',
+    'markets':'Target pasar EU','tm-other':'Lainnya',
+    'exporting':'Apakah sudah mengekspor ke pasar manapun?','te-yes':'Ya, sudah','te-no':'Belum',
+    'leadtime':'Lead time produksi yang umum',
+    'tlt-30':'Hingga 30 hari','tlt-60':'31 – 60 hari','tlt-90':'61 – 90 hari','tlt-91':'Lebih dari 90 hari',
+    'audit':'Audit pabrik atau keamanan pangan terakhir',
+    'tfa-recent':'Dalam 2 tahun terakhir','tfa-older':'Lebih dari 2 tahun lalu','tfa-never':'Belum pernah diaudit',
+    'back2':'← Kembali','back3':'← Kembali','back4':'← Kembali',
+    'next1':'Lanjut →','next2':'Lanjut →','next3':'Lanjut →','submit':'Hitung skor saya →',
+    'outof':'dari 100','findings':'Temuan utama dan rekomendasi','howhelp':'Bagaimana CORDA membantu dari sini',
+    'cta-p':'Skor ini gratis. Langkah selanjutnya adalah Market Entry Roadmap — analisis gap compliance lengkap, shortlist importir, dan rencana aksi 90 hari khusus untuk produk Anda.',
+    'cta-btn':'Hubungi CORDA →','restart':'Jalankan penilaian lain'
+  }
+};
+
+const TID = {
+  't-back':'back','t-progress-title':'progress-title',
+  't-s1a':'s1a','t-s1b':'s1b',
+  't-producer':'producer','t-product':'product','t-category':'category',
+  'tc-condiment':'tc-condiment','tc-snack':'tc-snack','tc-beverage':'tc-beverage','tc-ready':'tc-ready','tc-other':'tc-other',
+  't-ingredients':'ingredients',
+  't-processing':'processing',
+  'tp-past':'tp-past','tp-ferm':'tp-ferm','tp-fd':'tp-fd','tp-smoke':'tp-smoke','tp-raw':'tp-raw','tp-other':'tp-other',
+  't-certs':'certs','tc-nocert':'tc-nocert',
+  't-allergens':'allergens',
+  'ta-peanut':'ta-peanut','ta-treenuts':'ta-treenuts','ta-gluten':'ta-gluten','ta-dairy':'ta-dairy',
+  'ta-eggs':'ta-eggs','ta-soy':'ta-soy','ta-sesame':'ta-sesame','ta-fish':'ta-fish','ta-shell':'ta-shell','ta-none':'ta-none',
+  't-s2':'s2','t-langs':'langs',
+  'tl-en':'tl-en','tl-id':'tl-id','tl-nl':'tl-nl','tl-de':'tl-de','tl-zh':'tl-zh','tl-other':'tl-other','tl-none':'tl-none',
+  't-nutri':'nutri','tn-yes':'tn-yes','tn-no':'tn-no',
+  't-adecl':'adecl','tad-yes':'tad-yes','tad-no':'tad-no',
+  't-inglist':'inglist','til-yes':'til-yes','til-no':'til-no',
+  't-s3':'s3','t-price':'price','t-price-hint':'price-hint','t-packsize':'packsize',
+  't-capacity':'capacity',
+  'tmc-u1k':'tmc-u1k','tmc-1-5k':'tmc-1-5k','tmc-5-20k':'tmc-5-20k','tmc-20k':'tmc-20k',
+  't-budget':'budget',
+  'tb-u5':'tb-u5','tb-5-15':'tb-5-15','tb-15-30':'tb-15-30','tb-30':'tb-30',
+  't-s4':'s4','tm-other':'tm-other',
+  't-markets':'markets','t-exporting':'exporting','te-yes':'te-yes','te-no':'te-no',
+  't-leadtime':'leadtime',
+  'tlt-30':'tlt-30','tlt-60':'tlt-60','tlt-90':'tlt-90','tlt-91':'tlt-91',
+  't-audit':'audit',
+  'tfa-recent':'tfa-recent','tfa-older':'tfa-older','tfa-never':'tfa-never',
+  't-back2':'back2','t-back3':'back3','t-back4':'back4',
+  't-next1':'next1','t-next2':'next2','t-next3':'next3','t-submit':'submit',
+  't-outof':'outof','t-findings':'findings','t-howhelp':'howhelp',
+  't-cta-p':'cta-p','t-cta-btn':'cta-btn','t-restart':'restart'
+};
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-id').className = 'lang-btn' + (l==='id'?' active':'');
+  document.getElementById('btn-en').className = 'lang-btn' + (l==='en'?' active':'');
+  const t = TR[l];
+  for (const [id, key] of Object.entries(TID)) {
+    const el = document.getElementById(id);
+    if (el && t[key] !== undefined) el.textContent = t[key];
+  }
+  const step = ['step-1','step-2','step-3','step-4'].findIndex(s => {
+    const el = document.getElementById(s);
+    return el && el.style.display !== 'none';
+  }) + 1;
+  updateProgressLabel(step > 0 ? step : 1);
+  document.getElementById('producer_name').placeholder = l==='id'?'mis. PT Sumber Rasa':'e.g. PT Sumber Rasa';
+  document.getElementById('product_name').placeholder = l==='id'?'mis. Sambal Oelek Asli':'e.g. Sambal Oelek Original';
+  document.getElementById('ex_works_price').placeholder = l==='id'?'mis. 3.50':'e.g. 3.50';
+  document.getElementById('pack_size').placeholder = l==='id'?'mis. 250':'e.g. 250';
+  document.getElementById('main_ingredients').placeholder = l==='id'?'mis. cabai, cuka, garam, bawang putih':'e.g. chilli peppers, vinegar, salt, garlic';
+}
+
+function updateProgressLabel(n) {
+  const keys = ['s1-step','s2-step','s3-step','s4-step'];
+  const el = document.getElementById('t-progress-step');
+  if (el) el.textContent = TR[lang][keys[n-1]] || '';
+  const fill = document.getElementById('progress-fill');
+  if (fill) fill.style.width = (n * 25) + '%';
+}
+
+// ─── CHIP GROUPS ───
+function initChips() {
+  document.querySelectorAll('.chip-group').forEach(grp => {
+    const type = grp.dataset.type;
+    const id = grp.id;
+    grp.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const val = chip.dataset.val;
+        if (type === 'radio') {
+          grp.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          S[id] = val;
+        } else {
+          if (val === 'none') {
+            grp.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+            S[id] = ['none'];
+          } else {
+            const noneChip = grp.querySelector('[data-val="none"]');
+            if (noneChip) noneChip.classList.remove('selected');
+            chip.classList.toggle('selected');
+            S[id] = [...grp.querySelectorAll('.chip.selected')].map(c => c.dataset.val);
+          }
+        }
+      });
+    });
+  });
+}
+
+function goStep(n) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('step-' + i);
+    if (el) el.style.display = i === n ? 'block' : 'none';
+  }
+  updateProgressLabel(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── SCORING ───
+function calculate() {
+  const certs     = S.certifications || [];
+  const allergens = S.allergens || [];
+  const langs     = S.label_languages || [];
+  const markets   = S.target_eu_markets || [];
+  const category  = S.product_category;
+  const processing = S.processing_method;
+  const exWorks   = parseFloat(document.getElementById('ex_works_price').value) || 0;
+  const packSize  = parseFloat(document.getElementById('pack_size').value) || 0;
+
+  const hasHACCP = certs.includes('haccp');
+  const hasGMP   = certs.includes('gmp');
+  const hasBRC   = certs.includes('brc') || certs.includes('ifs');
+  const hasFSSC  = certs.includes('fssc22000');
+  const hasHalal = certs.includes('halal') || certs.includes('organic');
+
+  // D1 — Regulatory compliance
+  let food_safety = 0.1;
+  if (hasHACCP && hasGMP) food_safety = 1.0;
+  else if (hasHACCP) food_safety = 0.7;
+  else if (hasGMP)   food_safety = 0.5;
+  if (hasFSSC) food_safety = Math.min(1.0, food_safety + 0.15);
+  let product_risk = 0.6;
+  if (processing === 'pasteurised' || processing === 'freeze_dried') product_risk = 0.9;
+  else if (processing === 'smoked')    product_risk = 0.7;
+  else if (processing === 'fermented') product_risk = 0.45;
+  else if (processing === 'raw')       product_risk = 0.25;
+  const ac = allergens.includes('none') ? 0 : allergens.length;
+  const allergen_complexity = Math.max(0, 1.0 - ac * 0.15);
+  const d1 = food_safety * 0.40 + product_risk * 0.35 + allergen_complexity * 0.25;
+
+  // D2 — Labelling
+  let lang_ready = 0.2;
+  if (langs.includes('english')) {
+    lang_ready = 0.9;
+    if (langs.includes('dutch') || markets.includes('netherlands')) lang_ready = 1.0;
+  }
+  const nutri   = S.nutritional_info_on_pack === 'true' ? 0.5 : 0.0;
+  const adecl   = S.allergens_declared === 'true'       ? 1.0 : 0.0;
+  const inglist = S.ingredients_list === 'true'         ? 1.0 : 0.0;
+  const d2 = lang_ready * 0.30 + nutri * 0.25 + adecl * 0.25 + inglist * 0.20;
+
+  // D3 — Commercial
+  let price_pos = 0.5;
+  if (packSize > 0 && exWorks > 0) {
+    const p100 = (exWorks / packSize) * 100;
+    if (p100 < 0.80)          price_pos = 0.4;
+    else if (p100 <= 2.50)    price_pos = 0.7;
+    else if (p100 <= 5.00)    price_pos = 0.8;
+    else if (p100 <= 10.00)   price_pos = 1.0;
+    else                      price_pos = 0.6;
+  }
+  let pack_align = 0.5;
+  if (packSize > 0) {
+    const stds = [150,200,250,300,370,400];
+    const closest = Math.min(...stds.map(s => Math.abs(s - packSize)));
+    const pct = closest / packSize;
+    if (pct <= 0.25)      pack_align = 1.0;
+    else if (pct <= 0.50) pack_align = 0.7;
+    else                  pack_align = 0.4;
+  }
+  let budget_r = 0.3;
+  if      (S.budget_eur === 'over_30k')         budget_r = 1.0;
+  else if (S.budget_eur === 'between_15k_30k')  budget_r = 0.8;
+  else if (S.budget_eur === 'between_5k_15k')   budget_r = 0.6;
+  const d3 = price_pos * 0.50 + pack_align * 0.30 + budget_r * 0.20;
+
+  // D4 — Operational
+  let cap = 0.1;
+  if      (S.monthly_capacity === 'over_20000')          cap = 1.0;
+  else if (S.monthly_capacity === 'between_5000_20000')  cap = 0.7;
+  else if (S.monthly_capacity === 'between_1000_5000')   cap = 0.4;
+  const exp_s  = S.currently_exporting === 'true' ? 0.9 : 0.3;
+  const lt     = S.lead_time ? parseInt(S.lead_time) : 91;
+  const lead_s = lt <= 30 ? 1.0 : lt <= 60 ? 0.7 : lt <= 90 ? 0.4 : 0.1;
+  const audit_s = S.factory_audit === 'recent' ? 1.0 : S.factory_audit === 'older' ? 0.5 : 0.1;
+  const d4 = cap * 0.35 + exp_s * 0.30 + lead_s * 0.20 + audit_s * 0.15;
+
+  // D5 — Market fit
+  let diaspora = 0.4;
+  if      (markets.includes('netherlands'))                      diaspora = 1.0;
+  else if (markets.includes('germany') || markets.includes('france')) diaspora = 0.8;
+  else if (markets.includes('uk'))                               diaspora = 0.75;
+  else if (markets.includes('sweden'))                           diaspora = 0.65;
+  let cat_trend = 0.6;
+  if      (category === 'condiment') cat_trend = 0.90;
+  else if (category === 'beverage')  cat_trend = 0.75;
+  else if (category === 'snack')     cat_trend = 0.70;
+  const chan_fit = (hasBRC || food_safety >= 0.7) ? 0.8 : 0.5;
+  const d5 = diaspora * 0.40 + cat_trend * 0.35 + chan_fit * 0.25;
+
+  // D6 — Cert gap
+  let cert_gap = 0;
+  if (hasHACCP) cert_gap += 0.35;
+  if (hasGMP)   cert_gap += 0.25;
+  if (hasBRC)   cert_gap += 0.30;
+  if (hasHalal) cert_gap += 0.10;
+  const d6 = cert_gap;
+
+  const total = Math.round((d1*0.25 + d2*0.20 + d3*0.18 + d4*0.17 + d5*0.12 + d6*0.08) * 100);
+
+  renderResults(total, {d1,d2,d3,d4,d5,d6}, {
+    category, certs, allergens, processing, langs, markets, exWorks, packSize,
+    hasHACCP, hasGMP, hasBRC, hasFSSC, hasHalal,
+    food_safety, product_risk, allergen_complexity,
+    lang_ready, nutri, adecl, inglist,
+    price_pos, pack_align, budget_r,
+    cap, exp_s, lead_s, audit_s, diaspora, cat_trend,
+    productName: document.getElementById('product_name').value.trim()
+  });
+}
+
+function barColor(v) {
+  return v >= 0.70 ? '#1D9E75' : v >= 0.45 ? '#D97706' : '#DC2626';
+}
+
+function renderResults(total, dims, ctx) {
+  const id = lang === 'id';
+
+  document.getElementById('form-view').style.display = 'none';
+  document.getElementById('results-view').style.display = 'block';
+
+  // Ring color
+  const col = total >= 65 ? '#1D9E75' : total >= 40 ? '#D97706' : '#DC2626';
+  document.getElementById('r-ring').style.borderColor = col;
+  document.getElementById('r-num').style.color = col;
+  document.getElementById('r-num').textContent = total;
+
+  // Tier badge
+  const tier = document.getElementById('r-tier');
+  let tierText, tierBg, tierCol;
+  if (total >= 65) {
+    tierText = id ? 'Siap masuk pasar' : 'Market ready';
+    tierBg = '#E6F5F0'; tierCol = '#0F6E56';
+  } else if (total >= 40) {
+    tierText = id ? 'Hampir siap' : 'Near ready';
+    tierBg = '#FEF3C7'; tierCol = '#D97706';
+  } else {
+    tierText = id ? 'Perlu persiapan' : 'Needs work';
+    tierBg = '#FEE2E2'; tierCol = '#DC2626';
+  }
+  tier.textContent = tierText;
+  tier.style.background = tierBg;
+  tier.style.color = tierCol;
+
+  // Verdict + desc
+  let verdict, desc;
+  if (total >= 65) {
+    verdict = id ? 'Siap mendekati importir EU' : 'Ready to approach EU importers';
+    desc    = id
+      ? 'Produk Anda menunjukkan kesiapan pasar yang kuat. Market Entry Roadmap akan mempercepat jalur Anda menuju penjualan pertama dengan shortlist importir dan rencana aksi konkret.'
+      : 'Your product shows strong market readiness. A Market Entry Roadmap will accelerate your path to first sale with a concrete importer shortlist and action plan.';
+  } else if (total >= 40) {
+    verdict = id ? 'Menjanjikan — gap yang dapat diatasi teridentifikasi' : 'Promising — addressable gaps identified';
+    desc    = id
+      ? 'Produk Anda memiliki potensi nyata untuk pasar EU. Gap yang teridentifikasi dapat diatasi secara bertahap — Anda tidak perlu menyelesaikan semuanya sebelum memulai percakapan dengan importir.'
+      : 'Your product has real potential for the EU market. The identified gaps are addressable in stages — you don\'t need to close all of them before starting importer conversations.';
+  } else {
+    verdict = id ? 'Pekerjaan fondasi diperlukan terlebih dahulu' : 'Foundation work needed first';
+    desc    = id
+      ? 'Beberapa gap kepatuhan kritis perlu diselesaikan sebelum produk Anda dapat dipasarkan ke importir EU. CORDA dapat membantu Anda memprioritaskan dan mengatasi gap ini secara efisien.'
+      : 'Several critical compliance gaps need to be closed before your product can be marketed to EU importers. CORDA can help you prioritise and address these gaps efficiently.';
+  }
+  document.getElementById('r-verdict').textContent = verdict;
+  document.getElementById('r-desc').textContent = desc;
+
+  // Dimension bars
+  const dimLabels = id
+    ? ['Kepatuhan regulasi','Label & dok.','Kelayakan komersial','Kesiapan operasional','Kesesuaian pasar','Gap sertifikasi']
+    : ['Regulatory compliance','Labelling & docs','Commercial viability','Operational readiness','Market fit','Certification gap'];
+  const dimVals = [dims.d1,dims.d2,dims.d3,dims.d4,dims.d5,dims.d6];
+  const dimsEl = document.getElementById('r-dims');
+  dimsEl.innerHTML = '';
+  dimVals.forEach((v, i) => {
+    const pct = Math.round(v * 100);
+    const c = barColor(v);
+    dimsEl.innerHTML += `<div class="dim-row">
+      <span class="dim-label">${dimLabels[i]}</span>
+      <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:${pct}%;background:${c}"></div></div>
+      <span class="dim-val" style="color:${c}">${pct}</span>
+    </div>`;
+  });
+
+  // Findings
+  const findings = buildFindings(ctx, id);
+  const findingsEl = document.getElementById('r-findings');
+  findingsEl.innerHTML = '';
+  findings.forEach(f => {
+    const icon = f.type === 'warn' ? '!' : f.type === 'ok' ? '✓' : 'i';
+    findingsEl.innerHTML += `<div class="finding-item">
+      <div class="finding-icon ${f.type}">${icon}</div>
+      <div class="finding-body">
+        <div class="finding-title">${f.title}</div>
+        <div class="finding-detail">${f.detail}</div>
+        ${f.corda ? `<div class="finding-corda">${f.corda}</div>` : ''}
+      </div>
+    </div>`;
+  });
+
+  // How CORDA helps
+  const steps = buildHowSteps(total, ctx, id);
+  const howEl = document.getElementById('r-how');
+  howEl.innerHTML = '';
+  steps.forEach((s, i) => {
+    howEl.innerHTML += `<div class="how-step">
+      <div class="how-num">${i+1}</div>
+      <div>
+        <div class="how-step-title">${s.title}</div>
+        <div class="how-step-body">${s.body}</div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('t-findings').textContent = TR[lang]['findings'];
+  document.getElementById('t-howhelp').textContent  = TR[lang]['howhelp'];
+  document.getElementById('t-outof').textContent    = TR[lang]['outof'];
+  document.getElementById('t-cta-p').textContent    = TR[lang]['cta-p'];
+  document.getElementById('t-cta-btn').textContent  = TR[lang]['cta-btn'];
+  document.getElementById('t-restart').textContent  = TR[lang]['restart'];
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildFindings(ctx, id) {
+  const f = [];
+
+  if (!ctx.hasHACCP) f.push({ type:'warn',
+    title: id ? 'Tidak ada sertifikasi HACCP' : 'No HACCP certification',
+    detail: id
+      ? 'Dibutuhkan oleh semua importir dan retailer EU sebagai fondasi keamanan pangan dasar. Di Indonesia, sertifikasi HACCP melalui lembaga yang diakui EU biasanya membutuhkan 3–6 bulan dan Rp 30–80 juta.'
+      : 'Required by all EU importers and retailers as baseline food safety. Certification typically takes 3–6 months.',
+    corda: id
+      ? 'Memetakan lembaga sertifikasi HACCP berbiaya rendah yang diakui EU di Indonesia dan menyiapkan dokumentasi Anda untuk audit dalam 60 hari.'
+      : 'Maps low-cost EU-recognised HACCP certification bodies and prepares your documentation for audit within 60 days.'
+  });
+
+  if (!ctx.hasGMP) f.push({ type:'warn',
+    title: id ? 'Tidak ada sertifikasi GMP' : 'No GMP certification',
+    detail: id
+      ? 'GMP berpasangan dengan HACCP untuk memenuhi persyaratan sistem keamanan pangan EU. Sering dapat disertifikasi bersamaan dengan HACCP untuk efisiensi biaya dan waktu.'
+      : 'GMP pairs with HACCP to meet EU food safety system requirements. Often certifiable alongside HACCP.',
+    corda: id
+      ? 'Mengidentifikasi apakah BPOM GMP Indonesia diakui oleh target importir Anda, atau apakah sertifikasi tambahan diperlukan.'
+      : 'Identifies whether Indonesian BPOM GMP is recognised by your target importers, or whether additional certification is needed.'
+  });
+
+  if (!ctx.langs.includes('english')) f.push({ type:'warn',
+    title: id ? 'Tidak ada Bahasa Inggris di label' : 'No English on label',
+    detail: id
+      ? 'Label Bahasa Inggris adalah persyaratan minimum untuk ekspor EU di bawah Regulasi EU 1169/2011. Ini biasanya memerlukan desain ulang kemasan sebelum pendekatan importir pertama.'
+      : 'English labelling is a minimum requirement for EU export under EU Regulation 1169/2011. Label redesign will be needed before the first importer approach.',
+    corda: id
+      ? 'Menyediakan checklist kepatuhan label EU lengkap dan menghubungkan Anda dengan desainer kemasan yang berpengalaman di standar pasar Belanda dan Jerman.'
+      : 'Provides a full EU label compliance checklist and connects you with packaging designers experienced in Dutch and German market standards.'
+  });
+
+  if (ctx.nutri < 0.5) f.push({ type:'warn',
+    title: id ? 'Informasi gizi tidak ada di kemasan' : 'Nutritional information missing from pack',
+    detail: id
+      ? 'Wajib di bawah Regulasi EU 1169/2011. Panel gizi harus dalam format yang ditentukan EU, yang berbeda dari format Indonesia yang umum digunakan.'
+      : 'Mandatory under EU Regulation 1169/2011. The nutrition panel must be in EU-specified format, which differs from common Indonesian label formats.',
+    corda: id
+      ? 'Menyediakan template panel gizi format EU dan panduan cara menghitung nilai gizi dari resep produk Anda.'
+      : 'Provides EU-format nutrition panel templates and guidance on calculating nutritional values from your product recipe.'
+  });
+
+  if (ctx.adecl < 1.0) f.push({ type:'warn',
+    title: id ? 'Deklarasi alergen perlu ditinjau' : 'Allergen declaration needs review',
+    detail: id
+      ? 'Deklarasi alergen yang salah adalah penyebab penolakan impor EU yang paling umum. EU mewajibkan 14 alergen utama dideklarasikan dengan cara yang sangat spesifik.'
+      : 'Incorrect allergen declarations are the most common cause of EU import rejection. The EU mandates 14 major allergens be declared in a very specific way.',
+    corda: id
+      ? 'Melakukan review deklarasi alergen berdasarkan daftar bahan Anda dan memvalidasi sesuai Regulasi EU 1169/2011 sebelum pengiriman ke importir.'
+      : 'Performs allergen declaration review against your ingredient list and validates against EU Regulation 1169/2011 before any importer submission.'
+  });
+
+  if (!ctx.hasBRC && ctx.hasHACCP) f.push({ type:'info',
+    title: id ? 'BRC atau IFS akan membuka saluran ritel' : 'BRC or IFS would unlock retail channel access',
+    detail: id
+      ? 'Sebagian besar supermarket dan distributor foodservice Eropa mensyaratkan BRC atau IFS. Ini bukan pemblokir untuk masuk pasar pertama via importir spesialis, tapi diperlukan untuk skala ke ritel.'
+      : 'Most European supermarkets and foodservice distributors require BRC or IFS. Not a blocker for first market entry via specialist importers, but needed to scale into retail.',
+    corda: id
+      ? 'Mencocokkan Anda dengan importir yang sesuai dengan profil sertifikasi Anda saat ini dan membangun roadmap sertifikasi bertahap menuju BRC.'
+      : 'Matches you with importers suited to your current certification profile and builds a phased certification roadmap toward BRC.'
+  });
+
+  if (ctx.exp_s < 0.9) f.push({ type:'info',
+    title: id ? 'Belum ada rekam jejak ekspor' : 'No export track record yet',
+    detail: id
+      ? 'Importir EU lebih menyukai produsen yang sudah mengekspor, bahkan ke pasar lain di Asia Tenggara. Ekspor ke Singapura atau Malaysia adalah batu loncatan yang baik dan dapat dibangun dengan cepat.'
+      : 'EU importers prefer producers already exporting, even to other SEA markets. Exporting to Singapore or Malaysia first is a strong stepping stone and can be built quickly.',
+    corda: id
+      ? 'Mengidentifikasi importir EU yang secara khusus bekerja dengan produsen baru dan membangun narasi masuk pasar yang meyakinkan meskipun tanpa rekam jejak ekspor sebelumnya.'
+      : 'Identifies EU importers who specifically work with new-to-export producers and builds a compelling market entry narrative even without prior export history.'
+  });
+
+  if (ctx.markets.includes('netherlands') || ctx.diaspora >= 0.8) f.push({ type:'ok',
+    title: id ? 'Belanda adalah pintu masuk terkuat untuk produsen Indonesia' : 'Netherlands is the strongest entry point for Indonesian producers',
+    detail: id
+      ? 'Belanda memiliki komunitas diaspora Indonesia terbesar di Eropa (~500.000 orang), saluran impor yang sangat matang untuk produk Asia Tenggara, dan distributor yang sudah berpengalaman dengan preferensi konsumen Indonesia.'
+      : 'Netherlands has the largest Indonesian diaspora in Europe (~500,000 people), very mature import channels for SEA products, and distributors already experienced with Indonesian consumer preferences.',
+    corda: id
+      ? 'Memiliki jaringan importir Belanda yang aktif dan dapat membuat perkenalan hangat dalam 2–4 minggu setelah Roadmap selesai.'
+      : 'Has an active Dutch importer network and can make warm introductions within 2–4 weeks of Roadmap completion.'
+  });
+
+  if (ctx.hasHACCP && ctx.hasGMP) f.push({ type:'ok',
+    title: id ? 'HACCP + GMP dikonfirmasi — fondasi kepatuhan kuat' : 'HACCP + GMP confirmed — strong compliance foundation',
+    detail: id
+      ? 'Kombinasi ini memenuhi persyaratan dasar keamanan pangan EU dan memposisikan Anda dengan baik untuk percakapan dengan importir spesialis. Anda siap untuk pendekatan pasar pertama di level ini.'
+      : 'This combination meets EU baseline food safety requirements and positions you well for conversations with specialist importers. You are ready for first market approach at this level.',
+    corda: id
+      ? 'Membangun di atas fondasi ini untuk mencocokkan Anda dengan importir yang tepat dan mendefinisikan langkah sertifikasi berikutnya untuk membuka saluran yang lebih luas.'
+      : 'Builds on this foundation to match you with the right importers and defines the next certification steps to unlock broader channels.'
+  });
+
+  return f.slice(0, 8);
+}
+
+function buildHowSteps(total, ctx, id) {
+  if (total < 40) return [
+    {
+      title: id ? 'T2 — Market Entry Roadmap (€7.500)' : 'T2 — Market Entry Roadmap (€7,500)',
+      body: id
+        ? 'Analisis gap kepatuhan lengkap di semua 6 dimensi dengan rencana aksi 90 hari yang diprioritaskan. Kami urutan apa yang harus diselesaikan dulu, apa yang bisa ditunda, dan apa yang bisa berjalan paralel — disesuaikan dengan anggaran dan kapasitas operasional Anda.'
+        : 'Full compliance gap analysis across all 6 dimensions with a prioritised 90-day action plan. We sequence what must be fixed first, what can wait, and what can run in parallel — calibrated to your budget and operational capacity.'
+    },
+    {
+      title: id ? 'Bimbingan sertifikasi HACCP di Indonesia' : 'HACCP certification guidance in Indonesia',
+      body: id
+        ? 'CORDA mengidentifikasi lembaga sertifikasi HACCP yang diakui EU yang beroperasi di Indonesia, membantu menyiapkan dokumentasi HACCP Anda, dan membimbing Anda melalui proses audit. Jalur tipikal: 60–90 hari dari awal hingga sertifikat.'
+        : 'CORDA identifies EU-recognised HACCP certification bodies operating in Indonesia, helps prepare your HACCP documentation, and guides you through the audit process. Typical path: 60–90 days from start to certificate.'
+    },
+    {
+      title: id ? 'Perbaikan kepatuhan label' : 'Label compliance remediation',
+      body: id
+        ? 'Checklist kepatuhan label EU yang lengkap berdasarkan produk spesifik Anda, termasuk persyaratan informasi gizi, deklarasi alergen, dan bahasa. CORDA menghubungkan Anda dengan desainer kemasan yang berpengalaman di persyaratan pasar Belanda dan Jerman.'
+        : 'Full EU label compliance checklist specific to your product, including nutritional information, allergen declaration, and language requirements. CORDA connects you with packaging designers experienced in Dutch and German market requirements.'
+    }
+  ];
+
+  if (total < 65) return [
+    {
+      title: id ? 'T2 — Market Entry Roadmap (€7.500)' : 'T2 — Market Entry Roadmap (€7,500)',
+      body: id
+        ? 'Peta jalan lengkap yang mengubah gap yang teridentifikasi menjadi langkah konkret. Termasuk shortlist 8–12 importir yang diprioritaskan berdasarkan profil produk, sertifikasi, dan kapasitas saat ini — bukan daftar panjang, melainkan pencocokan yang tepat.'
+        : 'A complete roadmap turning identified gaps into concrete steps. Includes a shortlist of 8–12 importers prioritised for your product profile, certifications, and current capacity — not a long list, but precise matching.'
+    },
+    {
+      title: id ? 'Pencocokan importir berdasarkan profil Anda saat ini' : 'Importer matching based on your current profile',
+      body: id
+        ? 'CORDA mencocokkan Anda dengan importir EU yang aktif membeli di kategori Anda, mengutamakan produk Asia Tenggara, dan bekerja dengan produsen yang masih dalam proses membangun sertifikasi penuh. Tidak semua importir mensyaratkan BRC untuk percakapan awal.'
+        : 'CORDA matches you with EU importers actively buying in your category, prioritising SEA products, and working with producers still building full certification. Not all importers require BRC for initial conversations.'
+    },
+    {
+      title: id ? 'Roadmap sertifikasi bertahap' : 'Phased certification roadmap',
+      body: id
+        ? 'Tidak semua gap harus ditutup sebelum pendekatan importir pertama Anda. CORDA membangun urutan: apa yang diperlukan untuk percakapan pertama, apa yang dapat dipenuhi dalam 6 bulan, dan apa yang dapat berjalan paralel dengan aktivitas masuk pasar awal.'
+        : 'Not every gap needs to be closed before your first importer approach. CORDA builds the sequencing: what\'s needed for the first conversation, what can be met within 6 months, and what can run in parallel with initial market entry activity.'
+    }
+  ];
+
+  return [
+    {
+      title: id ? 'T2 — Market Entry Roadmap (€7.500)' : 'T2 — Market Entry Roadmap (€7,500)',
+      body: id
+        ? 'Profil Anda kuat. Roadmap berfokus pada pencocokan importir dan persiapan negosiasi: penetapan harga, persyaratan volume minimum, lead time, dan persyaratan kontrak. Target: 2–3 perkenalan importir aktif dalam 30 hari setelah Roadmap selesai.'
+        : 'Your profile is strong. The Roadmap focuses on importer matching and negotiation preparation: pricing, minimum volume requirements, lead times, and contract requirements. Target: 2–3 active importer introductions within 30 days of Roadmap completion.'
+    },
+    {
+      title: id ? 'Perkenalan importir langsung' : 'Direct importer introductions',
+      body: id
+        ? 'CORDA membuat perkenalan hangat ke importir yang telah kami identifikasi dalam jaringan kami yang aktif membeli di kategori Anda. Ini adalah referensi aktif dengan konteks — bukan cold outreach.'
+        : 'CORDA makes warm introductions to importers we have identified in our network who are actively buying in your category. These are active referrals with context — not cold outreach.'
+    },
+    {
+      title: id ? 'T3 — Managed Entry (€10.000) — opsional' : 'T3 — Managed Entry (€10,000) — optional',
+      body: id
+        ? 'Untuk produsen yang siap berkomitmen penuh: CORDA mengelola seluruh proses — negosiasi importir, koordinasi logistik, dukungan dokumentasi bea cukai, dan pengawasan pesanan pertama hingga pengiriman berhasil.'
+        : 'For producers ready to fully commit: CORDA manages the entire process — importer negotiations, logistics coordination, customs documentation support, and first-order supervision through to successful delivery.'
+    }
+  ];
+}
+
+function restart() {
+  document.getElementById('form-view').style.display = 'block';
+  document.getElementById('results-view').style.display = 'none';
+  document.querySelectorAll('.chip.selected').forEach(c => c.classList.remove('selected'));
+  ['producer_name','product_name','ex_works_price','pack_size','main_ingredients'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  Object.keys(S).forEach(k => { S[k] = Array.isArray(S[k]) ? [] : null; });
+  goStep(1);
+}
+
+// ─── INIT ───
+initChips();
+setLang('id');
+</script>
+</body>
+</html>
